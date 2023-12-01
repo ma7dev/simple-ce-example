@@ -1,0 +1,12 @@
+entity: malaa-tech
+project: my-awesome-project
+
+program: run.py
+
+method: grid
+metric:
+  name: accuracy
+  goal: maximize
+parameters:
+  a:
+    values: [1, 2, 3, 4]
