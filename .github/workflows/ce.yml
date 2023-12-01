@@ -7,7 +7,7 @@ jobs:
     name: Start Controller
     runs-on: ubuntu-latest
     outputs:
-        sweep_url: ${{ steps.start_controller.outputs.sweep_url }}
+        SWEEP_URL: ${{ steps.start_controller.outputs.SWEEP_URL }}
     timeout-minutes: 4320
     steps:
     - uses: actions/checkout@v3
@@ -22,7 +22,7 @@ jobs:
     - id: start_controller
       name: Run Agent
       run: |
-        echo "sweep_url=$(wandb --version)"
+        echo "SWEEP_URL=$(wandb --version)" >> $GITHUB_OUTPUT
   run-experiments:
     name: Start Experiments
     # needs: start-controller
@@ -41,4 +41,4 @@ jobs:
         pip install -r requirements.txt
     - name: Run Agent
       run: |
-        echo $needs.sweep_url.outputs.sweep_url
+        echo $needs.start-controller.outputs.SWEEP_URL
