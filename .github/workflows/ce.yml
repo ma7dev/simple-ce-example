@@ -38,8 +38,9 @@ jobs:
   run-experiments:
     name: Start Experiments
     needs: start-controller
+    runs-on: [ local ]
     # runs-on: [ local, digitalocean ]
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash -el {0}
