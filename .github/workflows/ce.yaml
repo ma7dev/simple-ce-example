@@ -16,7 +16,7 @@ jobs:
           activate-environment: simple-ce-example
           environment-file: environment.yml
           python-version: 3.10
-          auto-activate-base: false
+          auto-activate-base: true
       - run: |
           conda info
           conda list
