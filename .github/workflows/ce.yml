@@ -38,7 +38,7 @@ jobs:
   run-experiments:
     name: Start Experiments
     needs: start-controller
-    runs-on: [ local ]
+    runs-on: [ self-hosted ]
     # runs-on: [ local, digitalocean ]
     # runs-on: ubuntu-latest
     defaults:
