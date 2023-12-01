@@ -20,15 +20,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - id: start_controller
-      name: Run Agent
+      name: Setup Controller
       run: |
         wandb login ${{ secrets.WANDB_API_KEY }}
         echo "SWEEP_URL=$(python start.py | tail -1)" >> $GITHUB_OUTPUT
   run-experiments:
     name: Start Experiments
     needs: start-controller
-    # runs-on: [ self-hosted ]
-    runs-on: ubuntu-latest
+    runs-on: [ self-hosted ]
+    # runs-on: ubuntu-latest
     timeout-minutes: 4320
     steps:
     - uses: actions/checkout@v3
