@@ -34,5 +34,4 @@ jobs:
     - name: Build wheels
       run: |
           conda activate ${{ env.ENV_NAME }}
-          poetry build
-    
+          wandb --version    
