@@ -22,7 +22,8 @@ jobs:
     - id: start_controller
       name: Run Agent
       run: |
-        echo "SWEEP_URL=$(wandb --version)" >> $GITHUB_OUTPUT
+        wandb login ${{ secrets.WANDB_API_KEY }}
+        echo "SWEEP_URL=$(python start.py | tail -1)" >> $GITHUB_OUTPUT
   run-experiments:
     name: Start Experiments
     needs: start-controller
@@ -41,4 +42,5 @@ jobs:
         pip install -r requirements.txt
     - name: Run Agent
       run: |
-        echo ${{ needs.start-controller.outputs.SWEEP_URL }}
+        wandb login ${{ secrets.WANDB_API_KEY }}
+        wandb agent ${{ needs.start-controller.outputs.SWEEP_URL }}
