@@ -1,16 +1,12 @@
 import wandb
-
-sweep_configuration = {
-    "name": "my-awesome-sweep",
-    "project": "my-awesome-project",
-    "metric": {"name": "accuracy", "goal": "maximize"},
-    "method": "grid",
-    "parameters": {"a": {"values": [1, 2, 3, 4]}},
-}
-
+import os
+import random
+import string
 
 def my_train_func():
-    wandb.init()
+    machine_num = os.environ.get("MACHINE_NUM")
+    random_string=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(5))
+    wandb.init(group=machine_num, name=f"{machine_num}-{random_string}")
     a = wandb.config.a
 
     wandb.log({"a": a, "accuracy": a + 1})

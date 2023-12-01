@@ -43,6 +43,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run Agent
       run: |
+        export MACHINE_NUM=1
         wandb login ${{ secrets.WANDB_API_KEY }}
         wandb agent ${{ needs.start-controller.outputs.SWEEP_URL }}
   run-agent-2:
@@ -64,5 +65,6 @@ jobs:
         pip install -r requirements.txt
     - name: Run Agent
       run: |
+        export MACHINE_NUM=2
         wandb login ${{ secrets.WANDB_API_KEY }}
         wandb agent ${{ needs.start-controller.outputs.SWEEP_URL }}
