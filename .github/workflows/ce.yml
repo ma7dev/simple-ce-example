@@ -41,4 +41,4 @@ jobs:
         pip install -r requirements.txt
     - name: Run Agent
       run: |
-        echo $needs.start-controller.outputs.SWEEP_URL
+        echo ${{ needs.start-controller.outputs.SWEEP_URL }}
