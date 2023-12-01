@@ -24,10 +24,31 @@ jobs:
       run: |
         wandb login ${{ secrets.WANDB_API_KEY }}
         echo "SWEEP_URL=$(python start.py | tail -1)" >> $GITHUB_OUTPUT
-  run-experiments:
-    name: Start Experiments
+  run-agent-1:
+    name: Run Agent 1 
     needs: start-controller
-    runs-on: [ self-hosted ]
+    runs-on: [ runner-1 ]
+    # runs-on: ubuntu-latest
+    timeout-minutes: 4320
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run Agent
+      run: |
+        wandb login ${{ secrets.WANDB_API_KEY }}
+        wandb agent ${{ needs.start-controller.outputs.SWEEP_URL }}
+  run-agent-2:
+    name: Run Agent 2 
+    needs: start-controller
+    runs-on: [ runner-2 ]
     # runs-on: ubuntu-latest
     timeout-minutes: 4320
     steps:
