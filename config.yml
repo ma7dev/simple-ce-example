@@ -8,5 +8,6 @@ metric:
   name: accuracy
   goal: maximize
 parameters:
-  a:
-    values: [1, 2, 3, 4]
+  x:
+    min: -10
+    max: 10
