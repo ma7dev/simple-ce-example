@@ -3,44 +3,42 @@ on:
   push:
     branches: main
 jobs:
-  start-controller:
-    name: Start Controller
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash -el {0}
-    timeout-minutes: 4320
-    env:
-      ENV_NAME: "simple_ce_example"
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.10"]
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Conda with Python ${{ matrix.python-version }}
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        miniconda-version: "latest"
-        python-version: ${{ matrix.python-version }}
-    - name: Setup dependencies
-      run: |
-        echo "Setting conda init..."
-        CONDA_PATH=$(conda info | grep -i 'base environment' | cut -d ":" -f2 | cut -d " " -f2)
-        source $CONDA_PATH/etc/profile.d/conda.sh
+#   start-controller:
+#     name: Start Controller
+#     runs-on: ubuntu-latest
+#     defaults:
+#       run:
+#         shell: bash -el {0}
+#     timeout-minutes: 4320
+#     env:
+#       ENV_NAME: "simple_ce_example"
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         python-version: ["3.10"]
+#     steps:
+#     - uses: actions/checkout@v3
+#     - name: Set up Conda with Python ${{ matrix.python-version }}
+#       uses: conda-incubator/setup-miniconda@v2
+#       with:
+#         miniconda-version: "latest"
+#         python-version: ${{ matrix.python-version }}
+#     - name: Setup dependencies
+#       run: |
+#         echo "Setting conda init..."
+#         CONDA_PATH=$(conda info | grep -i 'base environment' | cut -d ":" -f2 | cut -d " " -f2)
+#         source $CONDA_PATH/etc/profile.d/conda.sh
 
-        echo "Cearting the environment..."
-        conda env create -f environment.yml
-    - name: Build wheels
-      run: |
-          conda activate ${{ env.ENV_NAME }}
-          wandb --version    
+#         echo "Cearting the environment..."
+#         conda env create -f environment.yml
+#     - name: Build wheels
+#       run: |
+#           conda activate ${{ env.ENV_NAME }}
+#           wandb --version    
   run-experiments:
     name: Start Experiments
-    needs: start-controller
+    # needs: start-controller
     runs-on: [ self-hosted ]
-    # runs-on: [ local, digitalocean ]
-    # runs-on: ubuntu-latest
     timeout-minutes: 4320
     env:
       ENV_NAME: "simple_ce_example"
