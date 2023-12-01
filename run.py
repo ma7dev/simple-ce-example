@@ -10,7 +10,7 @@ def func():
     
     x = wandb.config.x
     
-    acc = x+1
+    acc = abs(x - 0.5)
     
     wandb.log({"x": x, "accuracy": acc})
 
