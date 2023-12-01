@@ -5,10 +5,13 @@ on:
 jobs:
   start-controller:
     name: Start Controller
+    timeout-minutes: 4320
+
     runs-on: ubuntu-latest
+
     outputs:
         SWEEP_URL: ${{ steps.start_controller.outputs.SWEEP_URL }}
-    timeout-minutes: 4320
+    
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
@@ -24,11 +27,19 @@ jobs:
       run: |
         wandb login ${{ secrets.WANDB_API_KEY }}
         echo "SWEEP_URL=$(python start.py | tail -1)" >> $GITHUB_OUTPUT
+
   run-agents:
     name: Run Agents 
     needs: start-controller
-    runs-on: [ r1, r2 ]
     timeout-minutes: 4320
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [r1, r2]
+    
+    runs-on: ${{ matrix.os }}
+
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
