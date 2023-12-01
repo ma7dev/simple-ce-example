@@ -25,7 +25,7 @@ jobs:
         echo "SWEEP_URL=$(wandb --version)" >> $GITHUB_OUTPUT
   run-experiments:
     name: Start Experiments
-    # needs: start-controller
+    needs: start-controller
     # runs-on: [ self-hosted ]
     runs-on: ubuntu-latest
     timeout-minutes: 4320
