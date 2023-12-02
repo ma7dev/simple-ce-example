@@ -6,7 +6,7 @@ import string
 def func():
     # get machine number
     machine_num = os.environ.get("MACHINE_NUM") or "0"
-    
+        
     # get random 5 character string
     random_string=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(5))
     
