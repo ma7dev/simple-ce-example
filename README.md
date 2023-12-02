@@ -26,4 +26,5 @@ Add the machine's label to `os: [MACHINE_LABEL]` in `.github/workflows/ce.yml` t
 
 ## More things to explore
 
-TBD
+- Data versioning using [`Data Version Control (DVC)`](https://dvc.org/).
+- Logging experiments to issues/PRs using [`Continuous Machine Learning (CML)`](https://cml.dev/).
