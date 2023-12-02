@@ -5,13 +5,13 @@ import string
 
 def func():
     # get machine number
-    machine_num = os.environ.get("MACHINE_NUM") or "0"
-    
+    machine_id = os.environ.get("MACHINE_ID") or "local"
+        
     # get random 5 character string
     random_string=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(5))
     
     # set experiment name
-    exp_name = f"{machine_num}-{random_string}"
+    exp_name = f"{machine_id}-{random_string}"
     
     # initialize experiment
     wandb.init(name=exp_name)
