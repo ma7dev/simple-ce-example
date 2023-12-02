@@ -3,7 +3,8 @@ import os
 import random
 import string
 
-def func():
+
+if __name__ == "__main__":
     # get machine number
     machine_id = os.environ.get("MACHINE_ID") or "local"
         
@@ -16,15 +17,11 @@ def func():
     # initialize experiment
     wandb.init(name=exp_name)
     
-    # get x from config
+    # get x from the experiment's config
     x = wandb.config.x
     
     # calculate accuracy
-    acc = abs(x - 0.5)
+    acc = x**2
     
     # log x and accuracy to wandb
     wandb.log({"x": x, "accuracy": acc})
-
-
-if __name__ == "__main__":
-    func()

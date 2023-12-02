@@ -9,5 +9,5 @@ metric:
   goal: maximize
 parameters:
   x:
-    min: -10
+    min: 1
     max: 10
