@@ -54,6 +54,6 @@ jobs:
     
     - name: Run Agent
       run: |
-        export MACHINE_NUM=${{ matrix.os }}
+        export MACHINE_ID=${{ matrix.os }}
         wandb login ${{ secrets.WANDB_API_KEY }}
         wandb agent ${{ needs.start-controller.outputs.SWEEP_URL }}
