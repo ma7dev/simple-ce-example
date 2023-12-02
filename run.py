@@ -6,7 +6,7 @@ import string
 
 if __name__ == "__main__":
     # get machine number
-    machine_id = os.environ.get("MACHINE_ID") or "local"
+    machine_id=os.environ.get("MACHINE_ID") or "local"
         
     # get random 5 character string
     random_string=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(5))
